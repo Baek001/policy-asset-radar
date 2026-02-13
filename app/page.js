@@ -1,14 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
-
-function getClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return null;
-  return createClient(url, key);
-}
+import Link from 'next/link';
+import { getSupabaseServerClient } from '../lib/supabase';
 
 export default async function Home() {
-  const supabase = getClient();
+  const supabase = getSupabaseServerClient();
   let events = [];
 
   if (supabase) {
@@ -22,8 +16,9 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>법안 자산 레이더</h1>
+      <h1>PPulse</h1>
       <p>정책/법안 변화가 내 자산·생활비에 미치는 영향</p>
+      <p><Link href="/portfolio">포트폴리오 노출 계산기 →</Link></p>
       <hr />
       <h2>사건 피드</h2>
       {events.length === 0 ? (
@@ -32,7 +27,7 @@ export default async function Home() {
         <ul>
           {events.map((e) => (
             <li key={e.id} style={{ marginBottom: 16 }}>
-              <b>{e.title}</b> [{e.impact_level}]
+              <b>{e.title}</b> [{e.impact_level}] <Link href={`/events/${e.id}`}>상세</Link>
               <div>{e.summary_ko}</div>
             </li>
           ))}

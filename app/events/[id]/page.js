@@ -1,36 +1,20 @@
 import Link from 'next/link';
-import { getSupabaseServerClient } from '../../../lib/supabase';
+import { supabase, fiveLineSummary } from '../../../lib/core';
 
-export default async function EventDetail({ params }) {
-  const supabase = getSupabaseServerClient();
-  const id = params.id;
+export default async function EventPage({ params }) {
+  const db = supabase();
+  const { data } = db ? await db.from('events').select('*').eq('id', params.id).single() : { data: null };
+  if (!data) return <main><p>사건 없음</p><Link href="/">뒤로</Link></main>;
 
-  let event = null;
-  if (supabase) {
-    const { data } = await supabase
-      .from('events')
-      .select('id,title,summary_ko,impact_level,created_at')
-      .eq('id', id)
-      .single();
-    event = data;
-  }
-
-  if (!event) {
-    return (
-      <main>
-        <h1>사건을 찾을 수 없습니다.</h1>
-        <Link href="/">← 피드로 돌아가기</Link>
-      </main>
-    );
-  }
-
+  const lines = fiveLineSummary(data.summary_ko);
   return (
     <main>
-      <Link href="/">← 피드로 돌아가기</Link>
-      <h1>{event.title}</h1>
-      <p><b>영향도:</b> {event.impact_level}</p>
-      <p><b>요약:</b> {event.summary_ko}</p>
-      <p><b>생성시각:</b> {new Date(event.created_at).toLocaleString('ko-KR')}</p>
+      <Link href="/">← 피드</Link>
+      <h1>{data.title}</h1>
+      <p>영향도: {data.impact_level}</p>
+      <h3>5줄 요약</h3>
+      <ol>{lines.map((l, i) => <li key={i}>{l}</li>)}</ol>
+      <p>원문: {data.source_url ? <a href={data.source_url}>링크</a> : '없음'}</p>
     </main>
   );
 }

@@ -1,5 +1,7 @@
 # PPulse 로컬 스모크 테스트
 
+> Last quick run: 2026-02-15 08:12 KST (production endpoints healthy)
+
 아래 순서대로 실행하면 배포 전 핵심 동작을 빠르게 점검할 수 있습니다.
 
 1. 개발 서버 실행

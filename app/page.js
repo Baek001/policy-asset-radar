@@ -1,20 +1,39 @@
 import Link from 'next/link';
 import { supabase, fiveLineSummary } from '../lib/core';
+import { fetchLiveFeed } from '../lib/live';
 
 export default async function Home() {
   const db = supabase();
   let events = [];
   if (db) {
-    const { data } = await db.from('events').select('*').order('created_at', { ascending: false }).limit(20);
+    const { data } = await db.from('events').select('*').order('created_at', { ascending: false }).limit(10);
     events = data || [];
   }
+
+  const live = await fetchLiveFeed();
 
   return (
     <main>
       <h1>PPulse</h1>
-      <p>정책/법안 변화가 내 자산과 생활비에 주는 영향</p>
+      <p>미국/한국 우선 뉴스·법안 + 자산/생활비 영향 신호</p>
       <p><Link href="/portfolio">포트폴리오</Link> | <Link href="/living">생활비 영향</Link></p>
       <hr />
+
+      <h2>실시간 정책/법안 피드</h2>
+      {live.length === 0 ? <p>실시간 피드 없음 (API 키 확인 필요)</p> : (
+        <ul>
+          {live.map((e) => (
+            <li key={e.id} style={{ marginBottom: 16 }}>
+              <b>{e.title}</b> [{e.region.toUpperCase()} · {e.type} · {e.impact_level}]
+              <div>{fiveLineSummary(e.summary).slice(0, 2).join(' / ')}</div>
+              <div>태그: {(e.tags || []).join(', ') || '없음'} {e.source_url ? <a href={e.source_url} target="_blank">원문</a> : null}</div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <hr />
+      <h2>내 DB 이벤트</h2>
       {events.length === 0 ? <p>이벤트 없음</p> : (
         <ul>
           {events.map((e) => (

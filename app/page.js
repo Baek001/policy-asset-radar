@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { supabase, fiveLineSummary } from '../lib/core';
+import { supabase, fiveLineSummary, assetExposureFromEvent, livingImpactFromTags } from '../lib/core';
 import { fetchLiveFeed } from '../lib/live';
 
 export default async function Home() {
@@ -22,13 +22,19 @@ export default async function Home() {
       <h2>실시간 정책/법안 피드</h2>
       {live.length === 0 ? <p>실시간 피드 없음 (API 키 확인 필요)</p> : (
         <ul>
-          {live.map((e) => (
-            <li key={e.id} style={{ marginBottom: 16 }}>
-              <b>{e.title}</b> [{e.region.toUpperCase()} · {e.type} · {e.impact_level}]
-              <div>{fiveLineSummary(e.summary).slice(0, 2).join(' / ')}</div>
-              <div>태그: {(e.tags || []).join(', ') || '없음'} {e.source_url ? <a href={e.source_url} target="_blank">원문</a> : null}</div>
-            </li>
-          ))}
+          {live.map((e) => {
+            const exposure = assetExposureFromEvent({ title: e.title, tags: e.tags }).slice(0, 2);
+            const living = livingImpactFromTags(e.tags || []);
+            return (
+              <li key={e.id} style={{ marginBottom: 16 }}>
+                <b>{e.title}</b> [{e.region.toUpperCase()} · {e.type} · {e.impact_level}]
+                <div>{fiveLineSummary(e.summary).slice(0, 2).join(' / ')}</div>
+                <div>자산 노출: {exposure.map((x) => `${x.asset}:${x.level}`).join(', ')}</div>
+                <div>생활비 노출: {living.join(', ')}</div>
+                <div>태그: {(e.tags || []).join(', ') || '없음'} {e.source_url ? <a href={e.source_url} target="_blank">원문</a> : null}</div>
+              </li>
+            );
+          })}
         </ul>
       )}
 

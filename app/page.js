@@ -17,7 +17,13 @@ export default async function Home() {
     <main>
       <h1>PPulse</h1>
       <p>미국/한국 우선 뉴스·법안 + 자산/생활비 영향 신호</p>
-      <p><Link href="/portfolio">포트폴리오</Link> | <Link href="/living">생활비 영향</Link> | <AuthStatus /> | <a href="/api/ingest" target="_blank">DB 동기화 실행</a> | <a href="/api/health" target="_blank">상태 확인</a> | <a href="/api/demo" target="_blank">데모 JSON</a> | <a href="/api/release-status" target="_blank">릴리즈 상태</a></p>
+      <p><b>실시간 피드:</b> {live.length}건 · <b>DB 이벤트:</b> {events.length}건</p>
+      <p>
+        <Link href="/portfolio">포트폴리오</Link> | <Link href="/living">생활비 영향</Link> | <AuthStatus />
+      </p>
+      <p>
+        <a href="/api/ingest" target="_blank">DB 동기화 실행</a> | <a href="/api/health" target="_blank">상태 확인</a> | <a href="/api/demo" target="_blank">데모 JSON</a> | <a href="/api/release-status" target="_blank">릴리즈 상태</a>
+      </p>
       <hr />
 
       <h2>실시간 정책/법안 피드</h2>

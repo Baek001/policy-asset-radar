@@ -17,6 +17,7 @@
 - /events/[id] : 사건 상세 + 5줄 요약
 - /portfolio : 포트폴리오 노출 계산
 - /living : 생활비 영향
+- /auth : 이메일/구글 로그인
 
 ## 실행
 npm install

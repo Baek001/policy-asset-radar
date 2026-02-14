@@ -23,6 +23,7 @@
 ## 4) 배포 직후 점검
 - [ ] 홈 접속
 - [ ] `/api/health` 연결 상태 정상
+- [ ] `/api/release-status` 종합 체크 OK
 - [ ] `/api/ingest` 성공 및 DB 신규 적재
 - [ ] 로그인/로그아웃 동작
 - [ ] 주요 페이지(/, /portfolio, /living, /auth) 정상

@@ -1,5 +1,5 @@
 # PPulse Progress Snapshot
 
-- Latest commit: `de1f23c`
-- Core status: feed ingest + exposure + auth scaffold + health/demo endpoints complete
-- Next immediate step: final local smoke run and deploy handoff (`배포해` trigger)
+- Latest commit: `a360a5c`
+- Core status: production env/redeploy verified (`release-status ok:true`) + first-pass UI/mobile readability polish complete
+- Current phase: final smoke-check and hackathon handoff packaging

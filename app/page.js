@@ -31,6 +31,7 @@ export default async function Home() {
                 <div>{fiveLineSummary(e.summary).slice(0, 2).join(' / ')}</div>
                 <div>자산 노출: {exposure.map((x) => `${x.asset}:${x.level}`).join(', ')}</div>
                 <div>생활비 노출: {living.join(', ')}</div>
+                <div>근거: {(e.evidence || []).slice(0,2).join(' / ')}</div>
                 <div>태그: {(e.tags || []).join(', ') || '없음'} {e.related_count > 1 ? `(관련 ${e.related_count}건)` : ''} {e.source_url ? <a href={e.source_url} target="_blank">원문</a> : null}</div>
               </li>
             );

@@ -27,6 +27,7 @@ npm run dev
 - `GET /api/ingest` : 실시간 피드를 Supabase events 테이블로 적재
 - `GET /api/health` : 환경변수 연결 상태 + 피드 수집 상태 확인
 - `GET /api/demo` : 상위 이슈 5개 데모 응답(JSON)
+- `GET /api/release-status` : 배포 직전 필수 체크 종합 상태(JSON)
 
 ## 배포
 GitHub push 후 Vercel 자동 배포

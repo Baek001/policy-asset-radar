@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "smoke": "node -e \"Promise.all([fetch('http://localhost:3000/api/health').then(r=>r.json()),fetch('http://localhost:3000/api/demo').then(r=>r.json())]).then(([h,d])=>{console.log('health',h.ok,'feedCount',h.feedCount);console.log('demoTop',Array.isArray(d.top)?d.top.length:0);}).catch(e=>{console.error(e);process.exit(1);})\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

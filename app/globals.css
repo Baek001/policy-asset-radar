@@ -45,3 +45,8 @@ input, select, button {
 }
 button { cursor: pointer; }
 button:hover { border-color: var(--accent); }
+
+.meta-row {
+  color: var(--muted);
+  font-size: 14px;
+}

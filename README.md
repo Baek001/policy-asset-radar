@@ -22,5 +22,8 @@
 npm install
 npm run dev
 
+## 동기화
+- `GET /api/ingest` : 실시간 피드를 Supabase events 테이블로 적재
+
 ## 배포
 GitHub push 후 Vercel 자동 배포

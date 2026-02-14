@@ -28,11 +28,12 @@ h2 { margin-top: 24px; font-size: 22px; }
 
 ul { padding-left: 18px; }
 li {
-  background: rgba(18, 26, 49, 0.8);
-  border: 1px solid rgba(159, 176, 217, 0.2);
-  border-radius: 10px;
-  padding: 10px 12px;
+  background: rgba(18, 26, 49, 0.88);
+  border: 1px solid rgba(159, 176, 217, 0.22);
+  border-radius: 12px;
+  padding: 12px 14px;
   margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 input, select, button {

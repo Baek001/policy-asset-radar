@@ -1,9 +1,9 @@
 # Reference Site Analysis (news.gqai.kr/dashboard)
 
 ## Snapshot (2026-02-15)
-- Landing/dashboard appears content-first with card-based blocks and fast scan layout.
-- Visual pattern emphasizes concise blocks, loading skeletons, and high-density summary widgets.
-- Suitable takeaways for PPulse: top summary strip, compact cards, clear hierarchy for key metrics.
+- Landing/dashboard is heavily client-rendered; static fetch shows loading/skeleton-first rendering pattern.
+- Sitemap reveals product IA clearly: `/dashboard`, themed variants (`/dashboard-modern`, `/dashboard-warm`, `/dashboard-dark`), vertical pages (`/restaurants`, `/business`, `/casebook`, `/gov-releases`) and editorial detail pages.
+- Suitable takeaways for PPulse: top summary strip, compact cards, clear hierarchy for key metrics, plus vertical navigation by user domain.
 
 ## Elements to Borrow
 1. Top-priority summary section before feed list.
@@ -18,3 +18,8 @@
 - Top: super-issue x3
 - Mid: user-interest impact summary (item-level)
 - Bottom: same-day event feed with reason chips
+- Extra IA insight: keep lightweight route-based sections for audience contexts (e.g., `/living`, `/portfolio`) rather than one oversized feed.
+
+## Analysis Status
+- Completed: route/IA mapping via sitemap + dashboard rendering pattern capture.
+- Remaining for full parity: interactive behavior mapping (filters/sorts) requires live browser rendering access.

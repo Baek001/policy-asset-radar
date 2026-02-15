@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { supabase, fiveLineSummary, assetExposureFromEvent, livingImpactFromTags } from '../lib/core';
 import { fetchLiveFeed } from '../lib/live';
 import AuthStatus from '../components/AuthStatus';
+import OnboardingGate from '../components/OnboardingGate';
 
 export default async function Home() {
   const db = supabase();
@@ -14,6 +15,7 @@ export default async function Home() {
   const live = await fetchLiveFeed();
 
   return (
+    <OnboardingGate>
     <main>
       <h1>PPulse</h1>
       <p>미국/한국 우선 뉴스·법안 + 자산/생활비 영향 신호</p>
@@ -59,5 +61,6 @@ export default async function Home() {
         </ul>
       )}
     </main>
+    </OnboardingGate>
   );
 }
